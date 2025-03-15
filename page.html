@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Itinerary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .itinerary-list {
+            margin-top: 20px;
+        }
+        .itinerary-item {
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Travel Itinerary</h2>
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" placeholder="Enter destination">
+        
+        <label for="date">Date:</label>
+        <input type="date" id="date">
+        
+        <label for="description">Description:</label>
+        <textarea id="description" placeholder="Enter trip details"></textarea>
+        
+        <button onclick="addItinerary()">Add to Itinerary</button>
+        
+        <div class="itinerary-list" id="itineraryList"></div>
+    </div>
+
+    <script>
+        function addItinerary() {
+            let destination = document.getElementById("destination").value;
+            let date = document.getElementById("date").value;
+            let description = document.getElementById("description").value;
+
+            if (destination === "" || date === "" || description === "") {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            let itineraryList = document.getElementById("itineraryList");
+
+            let div = document.createElement("div");
+            div.classList.add("itinerary-item");
+
+            div.innerHTML = `
+                <strong>${destination}</strong> - ${date} <br>
+                <p>${description}</p>
+                <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+            `;
+
+            itineraryList.appendChild(div);
+
+            // Clear input fields after adding
+            document.getElementById("destination").value = "";
+            document.getElementById("date").value = "";
+            document.getElementById("description").value = "";
+        }
+    </script>
+
+</body>
+</html>
+
